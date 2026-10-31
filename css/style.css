@@ -165,6 +165,7 @@ main.container { padding-top: 24px; padding-bottom: 48px; min-height: 70vh; outl
 .owned { margin-left: auto; width: 20px; height: 20px; border-radius: 50%; background: var(--ok); color: #fff; font-size: 12px; display: grid; place-items: center; }
 .portrait { position: relative; height: 54%; background: #ddd; overflow: hidden; }
 .portrait svg, .portrait img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.avatar-img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 50% 22%; background: #d9d4cc; }
 .card-name { font-family: var(--serif); font-weight: 700; font-size: 20px; text-align: center; margin-top: 4px; }
 .card-sm .card-name { font-size: 18px; }
 .card-title { font-size: 11.5px; color: var(--muted); text-align: center; padding: 0 8px; line-height: 1.35; height: 2.7em; overflow: hidden; }
@@ -198,7 +199,7 @@ main.container { padding-top: 24px; padding-bottom: 48px; min-height: 70vh; outl
 .r-LEG { --frame: #8d6e63; }
 .r-X { --frame: #757575; }
 .is-fallen .portrait svg, .is-fallen .portrait img { filter: grayscale(1) contrast(.9); }
-.is-legend .portrait svg { filter: sepia(.65) saturate(.8); }
+.is-legend .portrait svg, .is-legend .portrait img { filter: sepia(.4) saturate(.85); }
 .stamp { position: absolute; right: 8px; bottom: 10px; transform: rotate(-14deg); border: 3px solid #c62828; color: #c62828; font-weight: 900; font-size: 18px; padding: 0 8px; border-radius: 6px; background: rgba(255, 255, 255, .78); letter-spacing: .1em; font-family: var(--serif); }
 .stamp-leg { border-color: #6d4c41; color: #6d4c41; font-size: 15px; }
 .rarity-badge { display: inline-block; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 6px; color: #fff; letter-spacing: .04em; }
@@ -213,11 +214,11 @@ main.container { padding-top: 24px; padding-bottom: 48px; min-height: 70vh; outl
 .person-chip { display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px 3px 3px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--frame, #9aa5b1); transition: background .15s; max-width: 100%; }
 .person-chip:hover { background: var(--surface-2); }
 .pc-av { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
-.pc-av svg { width: 100%; height: 100%; display: block; }
+.pc-av svg, .pc-av img { width: 100%; height: 100%; display: block; }
 .pc-text { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
 .pc-text b { font-size: 13.5px; }
 .pc-text small { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 150px; }
-.person-chip.is-fallen .pc-av svg { filter: grayscale(1); }
+.person-chip.is-fallen .pc-av svg, .person-chip.is-fallen .pc-av img { filter: grayscale(1); }
 .person-chip.is-fallen b { text-decoration: line-through; text-decoration-color: var(--bad); }
 .name-only { font-size: 13px; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); border: 1px dashed var(--border); }
 
@@ -252,7 +253,7 @@ main.container { padding-top: 24px; padding-bottom: 48px; min-height: 70vh; outl
 .org-top .org-node { padding: 10px 22px 10px 10px; border-width: 3px; background: linear-gradient(135deg, color-mix(in srgb, var(--red) 12%, var(--surface)), var(--surface)); }
 .on-av { width: 54px; height: 54px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
 .org-top .on-av { width: 72px; height: 72px; }
-.on-av svg { width: 100%; height: 100%; display: block; }
+.on-av svg, .on-av img { width: 100%; height: 100%; display: block; }
 .on-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
 .on-text small { color: var(--muted); font-size: 11.5px; }
 .on-text b { font-family: var(--serif); font-size: 18px; }
@@ -306,7 +307,9 @@ main.container { padding-top: 24px; padding-bottom: 48px; min-height: 70vh; outl
 .eg-node circle { stroke: var(--surface); stroke-width: 3; transition: r .15s; }
 .eg-node:hover circle { stroke: var(--gold); }
 .eg-node.center circle { stroke: var(--gold); stroke-width: 4; }
-.eg-node.is-fallen circle { filter: grayscale(1); opacity: .7; }
+.eg-node.is-fallen circle, .eg-node.is-fallen image { filter: grayscale(1); opacity: .75; }
+.eg-ring { fill: none; stroke-width: 3; }
+.eg-node.center .eg-ring { stroke: var(--gold) !important; stroke-width: 4; }
 .eg-char { fill: #fff; text-anchor: middle; font-family: var(--serif); font-weight: 700; pointer-events: none; }
 .eg-name { font-size: 13px; text-anchor: middle; fill: var(--text); font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
 
@@ -472,3 +475,10 @@ main.container { padding-top: 24px; padding-bottom: 48px; min-height: 70vh; outl
 @media (prefers-reduced-motion: reduce) {
   .card-inner, .gacha-slot, .toast, .modal-wrap { transition: none; animation: none; }
 }
+
+/* ---------- 照片署名 ---------- */
+.photo-credit { font-size: 11.5px; color: var(--muted); text-align: center; margin: 6px auto 0; max-width: 240px; line-height: 1.4; word-break: break-word; }
+.photo-credit a { color: inherit; text-decoration: underline; }
+.credits-list { columns: 2 320px; column-gap: 24px; font-size: 12.5px; padding-left: 18px; }
+.credits-list li { break-inside: avoid; margin-bottom: 6px; }
+.credits-list a { text-decoration: underline; }

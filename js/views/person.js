@@ -18,7 +18,7 @@
     el.innerHTML =
       '<nav class="crumbs small"><a href="#/cards">卡牌图鉴</a> / ' + esc(p.name) + '</nav>' +
       '<div class="person-page">' +
-        '<div class="pp-card">' + CP.ui.card(p, { uid: 'pp' }) + '<p class="muted small center">点击卡片翻面</p></div>' +
+        '<div class="pp-card">' + CP.ui.card(p, { uid: 'pp' }) + '<p class="muted small center">点击卡片翻面</p>' + CP.ui.photoCredit(p) + '</div>' +
         '<div class="pp-main">' +
           '<div class="pp-badges">' + CP.ui.rarityBadge(p) + CP.ui.statusBadge(p) + (wasR ? '<span class="muted small">下架前：' + wasR + ' 卡</span>' : '') + '</div>' +
           '<h1 class="pp-name">' + esc(p.name) + ' <small>' + esc(p.py || '') + '</small></h1>' +
@@ -94,7 +94,7 @@
           '<li><b>事实部分</b>（职务、任免时间、官方通报的处分）依据官方公开信息与主流媒体报道整理，数据截至 <b>' + CP.DATA_DATE + '</b>。人事变动频繁，请以新华社、中国政府网等官方发布为准。</li>' +
           '<li><b>派系标签</b>是境内外观察者与网络上的常用归类，不是官方组织，也不代表当事人自认。</li>' +
           '<li><b>攻击力、防御力、技能、戏称</b>纯属娱乐化演绎，不构成任何评价或预测。</li>' +
-          '<li>头像为程序生成的风格化剪影，<b>不是本人照片</b>。</li>' +
+          '<li><b>照片</b>来自维基共享资源（Wikimedia Commons）上可自由使用的图片，每张都注明了作者与授权方式（见下方「照片来源」）。少数人物暂无可用的自由授权照片，以姓氏字牌代替。</li>' +
           '<li>发现错误？欢迎在仓库提 Issue 或 PR，附上来源链接。</li>' +
         '</ul>' +
         '<h2>📐 数值算法（娱乐版）</h2>' +
@@ -110,8 +110,16 @@
       '<section class="section panel"><h2>📖 黑话词典</h2><dl class="glossary">' +
         CP.glossary.map(function (g) { return '<dt>' + esc(g[0]) + '</dt><dd>' + esc(g[1]) + '</dd>'; }).join('') +
       '</dl></section>' +
+      '<section class="section panel" id="credits"><h2>📷 照片来源</h2>' +
+        '<p class="muted small">以下照片均来自 Wikimedia Commons，按各自的授权条款使用；本站对部分照片做了裁切、缩放，以及（已下架/怀旧卡）灰度或褐色调处理。点击链接可查看原图与完整授权信息。</p>' +
+        '<ol class="credits-list">' + CP.sortPeople(CP.people.filter(function (p) { return CP.photoOf(p); })).map(function (p) {
+          var ph = CP.photoOf(p);
+          return '<li><b>' + esc(p.name) + '</b>：' + esc(ph.author || '作者见原页面') + ' · ' +
+            (ph.licenseUrl ? '<a href="' + esc(ph.licenseUrl) + '" target="_blank" rel="noopener">' + esc(ph.license) + '</a>' : esc(ph.license || '')) +
+            ' · <a href="' + esc(ph.source) + '" target="_blank" rel="noopener">原图</a></li>';
+        }).join('') + '</ol></section>' +
       '<section class="section panel prose"><h2>🔧 如何更新数据</h2>' +
-        '<p>所有数据都在 <code>js/data/</code> 下的几个文件里，与页面代码分离：<code>people.js</code>（人物）、<code>factions.js</code>（派系）、<code>departments.js</code>（部门）、<code>changelog.js</code>（更新公告）、<code>places.js</code>（省份与现任书记）、<code>glossary.js</code>（黑话词典）。改完运行 <code>node scripts/validate.js</code> 检查引用是否完整。</p>' +
+        '<p>所有数据都在 <code>js/data/</code> 下的几个文件里，与页面代码分离：<code>people.js</code>（人物）、<code>factions.js</code>（派系）、<code>departments.js</code>（部门）、<code>changelog.js</code>（更新公告）、<code>places.js</code>（省份与现任书记）、<code>glossary.js</code>（黑话词典）、<code>photos.js</code>（照片与署名，图片文件在 <code>img/people/</code>）。改完运行 <code>node scripts/validate.js</code> 检查引用是否完整。</p>' +
       '</section>';
   };
 })();

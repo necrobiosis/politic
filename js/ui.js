@@ -28,6 +28,14 @@
       '<span class="pc-text"><b>' + esc(p.name) + '</b><small>' + esc(extra || p.short || '') + '</small></span></a>';
   };
 
+  CP.ui.photoCredit = function (p) {
+    var ph = CP.photoOf(p);
+    if (!ph) return '<p class="photo-credit">暂无可用的自由授权照片</p>';
+    return '<p class="photo-credit">照片：' + esc(ph.author || '见原页面') + ' · ' +
+      (ph.licenseUrl ? '<a href="' + esc(ph.licenseUrl) + '" target="_blank" rel="noopener">' + esc(ph.license) + '</a>' : esc(ph.license || '')) +
+      ' · <a href="' + esc(ph.source) + '" target="_blank" rel="noopener">Wikimedia Commons</a></p>';
+  };
+
   CP.ui.placeChip = function (code) {
     var pl = CP.placeByCode[code]; if (!pl) return esc(code);
     return '<a class="chip place-chip" href="#/map/' + code + '">' + esc(pl.name) + '</a>';
@@ -183,9 +191,15 @@
     }).join('');
     function node(person, x, y, r, center) {
       var col = CP.primaryColor(person);
+      var ph = CP.photoOf(person);
+      var clip = 'egc-' + person.id + '-' + Math.round(x) + '-' + Math.round(y);
+      var face = ph
+        ? '<clipPath id="' + clip + '"><circle cx="' + x + '" cy="' + y + '" r="' + r + '"/></clipPath>' +
+          '<image class="eg-photo" href="' + esc(ph.file) + '" x="' + (x - r) + '" y="' + (y - r) + '" width="' + (2 * r) + '" height="' + (2 * r) + '" preserveAspectRatio="xMidYMin slice" clip-path="url(#' + clip + ')"/>' +
+          '<circle class="eg-ring" cx="' + x + '" cy="' + y + '" r="' + r + '" style="stroke:' + col + '"/>'
+        : '<text class="eg-char" x="' + x + '" y="' + (y + r * 0.36) + '" style="font-size:' + (r * 0.95) + 'px">' + esc(person.name.charAt(0)) + '</text>';
       return '<a href="#/p/' + person.id + '" class="eg-node' + (person.isFallen ? ' is-fallen' : '') + (center ? ' center' : '') + '">' +
-        '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" style="fill:' + col + '"/>' +
-        '<text class="eg-char" x="' + x + '" y="' + (y + r * 0.36) + '" style="font-size:' + (r * 0.95) + 'px">' + esc(person.name.charAt(0)) + '</text>' +
+        '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" style="fill:' + col + '"/>' + face +
         '<text class="eg-name" x="' + x + '" y="' + (y + r + 16) + '">' + esc(person.name) + (person.isFallen ? '（已下架）' : '') + '</text></a>';
     }
     var nodeSvg = nodes.map(function (nd) { return node(nd.l.other, nd.x, nd.y, 24, false); }).join('');

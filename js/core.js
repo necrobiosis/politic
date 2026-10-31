@@ -169,58 +169,28 @@
     return a + '–' + b;
   };
 
-  // ---------- 头像（风格化 SVG，不使用真实照片） ----------
+  // ---------- 头像：优先使用真实照片（见 js/data/photos.js），没有授权照片时显示姓氏字牌 ----------
   CP.primaryColor = function (p) {
     var f = p.factions.map(function (id) { return CP.factionById[id]; }).filter(Boolean)[0];
     if (p.tier === 'core') return '#b71c1c';
     return f ? f.color : '#5d6d7e';
   };
 
-  CP.avatar = function (p, opts) {
-    opts = opts || {};
-    var h = CP.hash(p.id);
-    var col = CP.primaryColor(p);
-    var uid = 'av' + p.id + (opts.uid || '');
-    var female = p.gender === 'f';
-    var mil = !!p.military;
-    var hairVar = h % 4;
-    var skin = ['#f2cfae', '#ecc29c', '#f5d6b8', '#e9bd93'][(h >>> 3) % 4];
-    var hair = '#141414'; // 统一纯黑
-    var suit = mil ? '#3f5a2b' : ['#1f2a44', '#232b38', '#2b2f3a', '#1b2533'][(h >>> 5) % 4];
-    var tie = mil ? '#2e4320' : '#b71c1c';
-    var surname = p.name.charAt(0);
-    var hairPath;
-    if (female) {
-      hairPath = '<path d="M30 52 C28 28 44 18 60 18 C76 18 92 28 90 52 L92 70 C86 60 84 50 84 44 C74 40 56 36 40 40 C36 50 34 60 28 70 Z" fill="' + hair + '"/>';
-    } else if (hairVar === 0) {
-      hairPath = '<path d="M36 44 C34 26 48 18 62 19 C78 20 88 30 85 46 C80 38 70 33 58 33 C48 33 40 37 36 44 Z" fill="' + hair + '"/>';
-    } else if (hairVar === 1) {
-      hairPath = '<path d="M35 46 C33 27 47 17 61 18 C77 19 89 29 86 47 C83 40 78 34 72 32 C62 36 46 36 35 46 Z" fill="' + hair + '"/>';
-    } else if (hairVar === 2) {
-      hairPath = '<path d="M36 45 C35 29 45 20 60 19 C76 19 87 29 85 45 C80 35 64 30 52 31 C46 32 40 37 36 45 Z" fill="' + hair + '"/>';
-    } else {
-      hairPath = '<path d="M37 47 C36 28 48 20 61 20 C75 20 86 28 84 47 C80 40 76 36 70 35 L60 30 L50 35 C44 37 40 41 37 47 Z" fill="' + hair + '"/>';
+  CP.photoOf = function (p) { return (CP.photos && CP.photos[p.id]) || null; };
+
+  CP.avatar = function (p) {
+    var ph = CP.photoOf(p);
+    if (ph) {
+      return '<img class="avatar-img" src="' + CP.esc(ph.file) + '" alt="' + CP.esc(p.name) + '" loading="lazy" decoding="async"' +
+        (ph.pos ? ' style="object-position:' + CP.esc(ph.pos) + '"' : '') + '>';
     }
-    var body = female
-      ? '<path d="M22 120 C24 96 38 86 60 86 C82 86 96 96 98 120 Z" fill="' + suit + '"/><path d="M50 86 L60 100 L70 86 Z" fill="#f4f4f4"/>'
-      : '<path d="M14 120 C16 94 34 84 60 84 C86 84 104 94 106 120 Z" fill="' + suit + '"/>' +
-        (mil
-          ? '<path d="M48 84 L60 100 L72 84 Z" fill="#c8b98a"/><path d="M60 92 L57 120 L63 120 Z" fill="' + tie + '"/><circle cx="38" cy="98" r="3" fill="#e6c34a"/><circle cx="82" cy="98" r="3" fill="#e6c34a"/>'
-          : '<path d="M46 84 L60 106 L74 84 Z" fill="#f4f4f4"/><path d="M57 88 L63 88 L65 96 L60 118 L55 96 Z" fill="' + tie + '"/>');
-    var svg =
-      '<svg class="avatar-svg" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + CP.esc(p.name) + ' 风格化头像" xmlns="http://www.w3.org/2000/svg">' +
-      '<defs><radialGradient id="' + uid + 'g" cx="50%" cy="35%" r="75%"><stop offset="0%" stop-color="' + col + '" stop-opacity="0.55"/><stop offset="100%" stop-color="' + col + '" stop-opacity="1"/></radialGradient></defs>' +
-      '<rect width="120" height="120" fill="url(#' + uid + 'g)"/>' +
-      '<text x="104" y="30" text-anchor="end" font-size="26" font-weight="700" fill="#fff" fill-opacity="0.22" font-family="serif">' + CP.esc(surname) + '</text>' +
-      body +
-      '<rect x="53" y="70" width="14" height="18" rx="5" fill="' + skin + '"/>' +
-      '<ellipse cx="60" cy="52" rx="23" ry="27" fill="' + skin + '"/>' +
-      hairPath +
-      '<ellipse cx="51" cy="54" rx="2.2" ry="2.6" fill="#2a2a2a"/><ellipse cx="69" cy="54" rx="2.2" ry="2.6" fill="#2a2a2a"/>' +
-      '<path d="M53 66 Q60 ' + (p.isFallen ? '62' : '70') + ' 67 66" stroke="#8a5a44" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+    var col = CP.primaryColor(p);
+    return '<svg class="avatar-svg avatar-mono" viewBox="0 0 120 120" preserveAspectRatio="xMidYMid slice" role="img" aria-label="' + CP.esc(p.name) + '（暂无可用照片）" xmlns="http://www.w3.org/2000/svg">' +
+      '<rect width="120" height="120" fill="' + col + '"/>' +
+      '<rect x="6" y="6" width="108" height="108" rx="8" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>' +
+      '<text x="60" y="76" text-anchor="middle" font-size="52" font-weight="700" fill="#fff" fill-opacity=".92" font-family="serif">' + CP.esc(p.name.charAt(0)) + '</text>' +
+      '<text x="60" y="102" text-anchor="middle" font-size="10" fill="#fff" fill-opacity=".7">暂无照片</text>' +
       '</svg>';
-    if (p.photo) svg = '<img class="avatar-img" src="' + CP.esc(p.photo) + '" alt="' + CP.esc(p.name) + '">';
-    return svg;
   };
 
   // ---------- 搜索 ----------
