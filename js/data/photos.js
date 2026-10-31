@@ -4,12 +4,26 @@
  */
 window.CP = window.CP || {};
 CP.photos = {
+  "boxilai": {
+    "file": "img/people/boxilai.jpg",
+    "author": "Georges Boulougouris",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bo-_Ferrero-Waldner_meeting_(2007).jpg"
+  },
   "caiqi": {
     "file": "img/people/caiqi.jpg",
     "author": "中国新闻网",
     "license": "CC BY 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
     "source": "https://commons.wikimedia.org/wiki/File:Cai_Qi.jpg"
+  },
+  "chengang": {
+    "file": "img/people/chengang.jpg",
+    "author": "中国新闻社",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Chen_Gang_2025.jpg"
   },
   "chenjining": {
     "file": "img/people/chenjining.jpg",
@@ -60,6 +74,13 @@ CP.photos = {
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Dong_Jun_(2024)_(cropped)_2.jpg"
   },
+  "fengfei": {
+    "file": "img/people/fengfei.jpg",
+    "author": "中国新闻网",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Feng_Fei-20220422.png"
+  },
   "hanzheng": {
     "file": "img/people/hanzheng.jpg",
     "author": "Foreign, Commonwealth & Development Office",
@@ -73,6 +94,13 @@ CP.photos = {
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "source": "https://commons.wikimedia.org/wiki/File:P-070565_00-19_01-ORIGINAL-168544_He_Lifeng_(cropped).jpg"
+  },
+  "heweidong": {
+    "file": "img/people/heweidong.jpg",
+    "author": "中国新闻社",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:He_Weidong_(20241223).png"
   },
   "huangkunming": {
     "file": "img/people/huangkunming.jpg",
@@ -200,6 +228,13 @@ CP.photos = {
     "licenseUrl": "",
     "source": "https://commons.wikimedia.org/wiki/File:Liu_Jianchao,_People%E2%80%99s_Republic_of_China_CCP_International_Liaison_Department_Minister_at_the_Department_of_State_in_Washington,_D.C._on_January_12,_2024_(cropped).jpg"
   },
+  "liuzhenli": {
+    "file": "img/people/liuzhenli.jpg",
+    "author": "中国新闻社",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Liu_Zhenli_2025.jpg"
+  },
   "lixi": {
     "file": "img/people/lixi.jpg",
     "author": "The President's Office, Maldives",
@@ -227,6 +262,13 @@ CP.photos = {
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "source": "https://commons.wikimedia.org/wiki/File:2022_Li_Zhanshu.jpg"
+  },
+  "luodongchuan": {
+    "file": "img/people/luodongchuan.jpg",
+    "author": "中国新闻社",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Luo_Dongchuan_2025.jpg"
   },
   "luowen": {
     "file": "img/people/luowen.jpg",
@@ -368,6 +410,20 @@ CP.photos = {
     "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
     "source": "https://commons.wikimedia.org/wiki/File:Xu_Qin_in_2014.jpg"
   },
+  "yinhong": {
+    "file": "img/people/yinhong.jpg",
+    "author": "World Intellectual Property Organization",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%B0%B9%E5%BC%98_2024-09-08.jpg"
+  },
+  "yinli": {
+    "file": "img/people/yinli.jpg",
+    "author": "Emiliano García-Page Sánchez from Toledo, España",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:%E5%B0%B9%E5%8A%9B_Yin_Li_2019.jpg"
+  },
   "yuanjiajun": {
     "file": "img/people/yuanjiajun.jpg",
     "author": "中国新闻社",
@@ -375,12 +431,26 @@ CP.photos = {
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Yuan_Jiajun.png"
   },
+  "zhangguoqing": {
+    "file": "img/people/zhangguoqing.jpg",
+    "author": "Aaron Berkovich (European Commission)",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhang_Guoqing_(cropped).jpg"
+  },
   "zhangyouxia": {
     "file": "img/people/zhangyouxia.jpg",
     "author": "Пресс-служба Президента России",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Zhang_Youxia_(2017-12-07)_3.jpg"
+  },
+  "zhaoleji": {
+    "file": "img/people/zhaoleji.jpg",
+    "author": "The President's Office, Maldives",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhao_Leji_meets_Mohamed_Muizzu_(2)(crop).jpg"
   },
   "zhaoyide": {
     "file": "img/people/zhaoyide.jpg",
@@ -395,5 +465,12 @@ CP.photos = {
     "license": "公有领域",
     "licenseUrl": "",
     "source": "https://commons.wikimedia.org/wiki/File:Zhou_Yongkang.jpg"
+  },
+  "zhouzuyi": {
+    "file": "img/people/zhouzuyi.jpg",
+    "author": "US Department of State",
+    "license": "公有领域",
+    "licenseUrl": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Zhou_Zuyi_(cropped)_01.jpg"
   }
 };
