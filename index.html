@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>红墙图鉴</title>
+  <meta name="description" content="用卡牌游戏和公司架构图的方式，戏说中国政治版图：谁在顶层、从哪来、去了哪、和谁是一伙、哪个部门管什么。非官方娱乐科普。">
+  <meta name="theme-color" content="#b71c1c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23b71c1c'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f5d76e' font-family='serif'%3E图%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="#/" aria-label="红墙图鉴 首页"><span class="logo-mark" aria-hidden="true">图</span><span class="logo-text">红墙图鉴<small>中国政治版图 · 戏说版</small></span></a>
+      <button id="nav-toggle" class="icon-btn nav-toggle" aria-label="菜单">☰</button>
+      <nav class="nav" aria-label="主导航">
+        <a href="#/org">架构图</a>
+        <a href="#/cards">卡牌图鉴</a>
+        <a href="#/factions">派系</a>
+        <a href="#/map">迁徙地图</a>
+        <a href="#/depts">部门</a>
+        <a href="#/news">更新公告</a>
+        <a href="#/about">关于</a>
+      </nav>
+      <div class="header-tools">
+        <div class="search">
+          <input id="global-search" class="input" type="search" placeholder="搜人 / 部门 / 派系（按 / 聚焦）" autocomplete="off" aria-label="全站搜索">
+          <div id="search-results" class="search-results" role="listbox" hidden></div>
+        </div>
+        <button id="mode-toggle" class="btn btn-sm mode-btn" aria-pressed="true">🎭 戏说模式</button>
+        <button id="theme-toggle" class="icon-btn" aria-label="切换主题">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container" tabindex="-1"></main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p><b>红墙图鉴</b> · 非官方娱乐科普站 · 数据截至 <span id="data-date"></span></p>
+      <p class="muted small">事实部分依据官方公开信息与主流媒体报道；派系标签为坊间说法；数值、技能、戏称纯属娱乐。头像为程序生成的剪影，非本人照片。人事信息以官方发布为准。</p>
+    </div>
+  </footer>
+
+  <script src="js/data/places.js"></script>
+  <script src="js/data/factions.js"></script>
+  <script src="js/data/departments.js"></script>
+  <script src="js/data/people.js"></script>
+  <script src="js/data/changelog.js"></script>
+  <script src="js/data/glossary.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/views/home.js"></script>
+  <script src="js/views/org.js"></script>
+  <script src="js/views/cards.js"></script>
+  <script src="js/views/factions.js"></script>
+  <script src="js/views/map.js"></script>
+  <script src="js/views/depts.js"></script>
+  <script src="js/views/person.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
